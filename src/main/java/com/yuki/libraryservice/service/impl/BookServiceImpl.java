@@ -2,6 +2,7 @@ package com.yuki.libraryservice.service.impl;
 
 import com.yuki.libraryservice.dto.BookResponse;
 import com.yuki.libraryservice.dto.CreateBookRequest;
+import com.yuki.libraryservice.dto.UpdateBookRequest;
 import com.yuki.libraryservice.entity.Book;
 import com.yuki.libraryservice.exception.BookNotFoundException;
 import com.yuki.libraryservice.mapper.BookMapper;
@@ -38,5 +39,15 @@ public class BookServiceImpl implements BookService {
     public BookResponse getBookById(Long id) {
         Book book = bookRepository.findById(id).orElseThrow(() -> new BookNotFoundException("Book not found"));
         return bookMapper.toResponse(book);
+    }
+
+    @Override
+    public BookResponse updateBook(Long id, UpdateBookRequest request) {
+        Book book = bookRepository.findById(id).orElseThrow(() -> new BookNotFoundException("Book not found"));
+        book.setTitle(request.getTitle());
+        book.setAuthor(request.getAuthor());
+        book.setIsbn(request.getIsbn());
+        Book savedBook = bookRepository.save(book);
+        return bookMapper.toResponse(savedBook);
     }
 }

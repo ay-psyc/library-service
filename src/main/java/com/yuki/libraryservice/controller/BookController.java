@@ -2,6 +2,7 @@ package com.yuki.libraryservice.controller;
 
 import com.yuki.libraryservice.dto.BookResponse;
 import com.yuki.libraryservice.dto.CreateBookRequest;
+import com.yuki.libraryservice.dto.UpdateBookRequest;
 import com.yuki.libraryservice.service.BookService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -34,5 +35,11 @@ public class BookController {
     public ResponseEntity<BookResponse> getBookById(@PathVariable Long id) {
         BookResponse bookById = bookService.getBookById(id);
         return ResponseEntity.ok(bookById);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<BookResponse> updateBook(@PathVariable Long id, @RequestBody @Valid UpdateBookRequest request) {
+        BookResponse bookResponse = bookService.updateBook(id, request);
+        return ResponseEntity.ok(bookResponse);
     }
 }
