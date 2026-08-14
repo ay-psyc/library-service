@@ -2,6 +2,8 @@ package com.yuki.libraryservice.service;
 
 import com.yuki.libraryservice.dto.BookResponse;
 import com.yuki.libraryservice.dto.CreateBookRequest;
+import com.yuki.libraryservice.dto.UpdateBookRequest;
+import jakarta.validation.Valid;
 
 import java.util.List;
 
@@ -11,4 +13,6 @@ public interface BookService {
      List<BookResponse> getAllBooks();
 
      BookResponse getBookById(Long id);
+
+     BookResponse updateBook(Long id, @Valid UpdateBookRequest request);
 }
