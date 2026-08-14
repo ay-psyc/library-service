@@ -3,11 +3,16 @@ package com.yuki.libraryservice.service.impl;
 import com.yuki.libraryservice.dto.BookResponse;
 import com.yuki.libraryservice.dto.CreateBookRequest;
 import com.yuki.libraryservice.entity.Book;
+import com.yuki.libraryservice.exception.BookNotFoundException;
 import com.yuki.libraryservice.mapper.BookMapper;
 import com.yuki.libraryservice.repository.BookRepository;
 import com.yuki.libraryservice.service.BookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -21,5 +26,17 @@ public class BookServiceImpl implements BookService {
         Book book = bookMapper.toEntity(request);
         Book savedBook = bookRepository.save(book);
         return bookMapper.toResponse(savedBook);
+    }
+
+    @Override
+    public List<BookResponse> getAllBooks() {
+        List<Book> bookList = bookRepository.findAll();
+        return bookList.stream().map(book -> bookMapper.toResponse(book)).toList();
+    }
+
+    @Override
+    public BookResponse getBookById(Long id) {
+        Book book = bookRepository.findById(id).orElseThrow(() -> new BookNotFoundException("Book not found"));
+        return bookMapper.toResponse(book);
     }
 }
