@@ -11,9 +11,7 @@ import com.yuki.libraryservice.service.BookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -49,5 +47,11 @@ public class BookServiceImpl implements BookService {
         book.setIsbn(request.getIsbn());
         Book savedBook = bookRepository.save(book);
         return bookMapper.toResponse(savedBook);
+    }
+
+    @Override
+    public void deleteBook(Long id) {
+        Book book = bookRepository.findById(id).orElseThrow(() -> new BookNotFoundException("Book not found"));
+        bookRepository.delete(book);
     }
 }
