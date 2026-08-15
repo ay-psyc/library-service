@@ -1,0 +1,7 @@
+package com.yuki.libraryservice.repository;
+
+import com.yuki.libraryservice.entity.Member;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface MemberRepository extends JpaRepository<Member, Long> {
+}
