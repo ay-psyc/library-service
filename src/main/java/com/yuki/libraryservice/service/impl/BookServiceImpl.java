@@ -4,6 +4,7 @@ import com.yuki.libraryservice.dto.BookResponse;
 import com.yuki.libraryservice.dto.CreateBookRequest;
 import com.yuki.libraryservice.dto.UpdateBookRequest;
 import com.yuki.libraryservice.entity.Book;
+import com.yuki.libraryservice.exception.BookAlreadyExistsException;
 import com.yuki.libraryservice.exception.BookNotFoundException;
 import com.yuki.libraryservice.mapper.BookMapper;
 import com.yuki.libraryservice.repository.BookRepository;
@@ -22,6 +23,11 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public BookResponse createBook(CreateBookRequest request) {
+        String isbn = request.getIsbn();
+        if (bookRepository.existsByIsbn(isbn)) {
+            throw new BookAlreadyExistsException("Book already exists");
+        }
+
         Book book = bookMapper.toEntity(request);
         Book savedBook = bookRepository.save(book);
         return bookMapper.toResponse(savedBook);
