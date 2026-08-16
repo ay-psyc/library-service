@@ -1,4 +1,4 @@
-package com.yuki.libraryservice.dto;
+package com.yuki.libraryservice.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
