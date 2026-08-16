@@ -1,4 +1,4 @@
-package com.yuki.libraryservice.dto;
+package com.yuki.libraryservice.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

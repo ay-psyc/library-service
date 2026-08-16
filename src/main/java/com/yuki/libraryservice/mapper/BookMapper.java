@@ -1,7 +1,7 @@
 package com.yuki.libraryservice.mapper;
 
-import com.yuki.libraryservice.dto.BookResponse;
-import com.yuki.libraryservice.dto.CreateBookRequest;
+import com.yuki.libraryservice.dto.response.BookResponse;
+import com.yuki.libraryservice.dto.request.CreateBookRequest;
 import com.yuki.libraryservice.entity.Book;
 import org.springframework.stereotype.Component;
 

@@ -1,8 +1,8 @@
 package com.yuki.libraryservice.service.impl;
 
-import com.yuki.libraryservice.dto.BookResponse;
-import com.yuki.libraryservice.dto.CreateBookRequest;
-import com.yuki.libraryservice.dto.UpdateBookRequest;
+import com.yuki.libraryservice.dto.response.BookResponse;
+import com.yuki.libraryservice.dto.request.CreateBookRequest;
+import com.yuki.libraryservice.dto.request.UpdateBookRequest;
 import com.yuki.libraryservice.entity.Book;
 import com.yuki.libraryservice.exception.BookAlreadyExistsException;
 import com.yuki.libraryservice.exception.BookNotFoundException;
