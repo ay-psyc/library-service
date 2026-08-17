@@ -60,4 +60,17 @@ public class GlobalExceptionHandler {
                 null
         );
     }
+
+    @ExceptionHandler(MemberAlreadyExistsException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ErrorResponse handleMemberAlreadyExistsException(MemberAlreadyExistsException ex, HttpServletRequest request) {
+        return new ErrorResponse(
+                Instant.now().toString(),
+                HttpStatus.CONFLICT.value(),
+                HttpStatus.CONFLICT.getReasonPhrase(),
+                request.getRequestURI(),
+                ex.getMessage(),
+                null
+        );
+    }
 }
