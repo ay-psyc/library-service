@@ -73,4 +73,17 @@ public class GlobalExceptionHandler {
                 null
         );
     }
+
+    @ExceptionHandler(MemberNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErrorResponse handleMemberNotFoundException(MemberNotFoundException ex, HttpServletRequest request) {
+        return new ErrorResponse(
+                Instant.now().toString(),
+                HttpStatus.NOT_FOUND.value(),
+                HttpStatus.NOT_FOUND.getReasonPhrase(),
+                request.getRequestURI(),
+                ex.getMessage(),
+                null
+        );
+    }
 }
