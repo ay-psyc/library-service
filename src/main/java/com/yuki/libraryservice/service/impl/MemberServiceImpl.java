@@ -54,4 +54,10 @@ public class MemberServiceImpl implements MemberService {
         return memberMapper.toResponse(saved);
     }
 
+    @Override
+    public void deleteMember(Long id) {
+        Member member = memberRepository.findById(id).orElseThrow(() -> new MemberNotFoundException("Member not found"));
+        memberRepository.delete(member);
+    }
+
 }

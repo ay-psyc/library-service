@@ -1,10 +1,8 @@
 package com.yuki.libraryservice.service;
 
 import com.yuki.libraryservice.dto.request.CreateMemberRequest;
-import com.yuki.libraryservice.dto.request.UpdateBookRequest;
 import com.yuki.libraryservice.dto.request.UpdateMemberRequest;
 import com.yuki.libraryservice.dto.response.MemberResponse;
-import jakarta.validation.Valid;
 
 import java.util.List;
 
@@ -16,4 +14,6 @@ public interface MemberService {
     List<MemberResponse> getAllMembers();
 
     MemberResponse updateMember(Long id, UpdateMemberRequest request);
+
+    void deleteMember(Long id);
 }
