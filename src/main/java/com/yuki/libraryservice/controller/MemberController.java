@@ -1,11 +1,12 @@
 package com.yuki.libraryservice.controller;
 
 import com.yuki.libraryservice.dto.request.CreateMemberRequest;
+import com.yuki.libraryservice.dto.request.UpdateBookRequest;
+import com.yuki.libraryservice.dto.request.UpdateMemberRequest;
 import com.yuki.libraryservice.dto.response.MemberResponse;
 import com.yuki.libraryservice.service.MemberService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,5 +36,11 @@ public class MemberController {
     public ResponseEntity<List<MemberResponse>> getAllMembers() {
         List<MemberResponse> allMembers = memberService.getAllMembers();
         return ResponseEntity.ok(allMembers);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<MemberResponse> updateMember(@PathVariable Long id, @Valid @RequestBody UpdateMemberRequest request) {
+        MemberResponse memberResponse = memberService.updateMember(id, request);
+        return ResponseEntity.ok(memberResponse);
     }
 }
