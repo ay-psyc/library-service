@@ -1,6 +1,8 @@
 package com.yuki.libraryservice.service.impl;
 
 import com.yuki.libraryservice.dto.request.CreateMemberRequest;
+import com.yuki.libraryservice.dto.request.UpdateBookRequest;
+import com.yuki.libraryservice.dto.request.UpdateMemberRequest;
 import com.yuki.libraryservice.dto.response.MemberResponse;
 import com.yuki.libraryservice.entity.Member;
 import com.yuki.libraryservice.exception.MemberAlreadyExistsException;
@@ -42,4 +44,20 @@ public class MemberServiceImpl implements MemberService {
         List<Member> memberList = memberRepository.findAll();
         return memberList.stream().map(member -> memberMapper.toResponse(member)).toList();
     }
+
+    @Override
+    public MemberResponse updateMember(Long id, UpdateMemberRequest request) {
+        Member member = memberRepository.findById(id).orElseThrow(() -> new MemberNotFoundException("Member not found"));
+        member.setName(request.getName());
+        member.setEmail(request.getEmail());
+        Member saved = memberRepository.save(member);
+        return memberMapper.toResponse(saved);
+    }
+
+    @Override
+    public void deleteMember(Long id) {
+        Member member = memberRepository.findById(id).orElseThrow(() -> new MemberNotFoundException("Member not found"));
+        memberRepository.delete(member);
+    }
+
 }
